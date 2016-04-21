@@ -1,0 +1,80 @@
+
+<template name="home">
+	<p> Welcome to erf </p>
+</template>
+
+<template name="register">
+	<h2> Register </h2>
+</template>
+
+<template name="login">
+	<h2> Login </h2>
+</template>
+	
+<template name="nav">
+	<ul>
+		<li> <a href="{{pathFor route='home'}}"> Home </a> </li>
+		<li> <a href="{{pathFor route='register'}}"> Register </a> </li>
+		<li> <a href="{{pathFor route='login'}}"> Login </a> </li>
+	</ul>
+</template>
+
+<template name="main">
+	<h1> Dos </h1>
+	{{>nav}}
+	{{>lists}}
+	{{>yield}}
+	<hr />
+	<p> &copy; sbahj, 2009-2016. </p>
+</template>
+
+<template name="listPage">
+	<h2> Tasks: {{name}} </h2>
+	{{>todos}}
+</template>
+
+<template name="lists">
+	<h2> Lists </h2>
+	{{>addList}}
+	<ul>
+		{{#each list}}
+			<li><a href="{{pathFor route='listPage'}}"> {{name}} </a></li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="addList">
+	<form> Create list:
+		<input type="text" placeholder="List name..." name="listName">
+	</form>
+</template>
+
+<template name="todos">
+	{{>addItem}}
+	<ul>
+		{{#each todo}}
+			{{>todoItem}}
+		{{/each}}
+	</ul>
+	{{>todoCount}}
+</template>
+
+<template name="todoItem">
+	<li class="{{checked}}">
+		<input type="checkbox" {{checked}}>
+		<input type="text" value="{{name}}" name="todoItem">
+		[<a href="#" class="deleteItem">Delete</a>] 
+	</li>
+</template>
+
+<template name="addItem">
+	<form>
+		<input type="text" placeholder="Add item..." name="addItem">
+	</form>
+</template>
+
+<template name="todoCount">
+	{{#if totalTodo}}
+		<p> Completed {{completedTodo}} out of {{totalTodo}}. </p>
+	{{/if}}
+</template>
